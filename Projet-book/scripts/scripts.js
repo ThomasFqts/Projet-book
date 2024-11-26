@@ -208,9 +208,9 @@ let searchbtn = document.getElementById("searchButton");
 searchbtn.addEventListener("click", searchByDescription);
 
 function searchByDescription() {
-    let searchterm = document.getElementById("searchDescription");
+    let searchterm = document.getElementById("searchDescription").value.toLowerCase();
 
-    if (searchterm.value.trim() === "") {
+    if (searchterm.trim() === "") {
         alert("Veuillez saisir une valeur");
         return;
     }
