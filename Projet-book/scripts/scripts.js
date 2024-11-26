@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", jsonOnLoad);
 
 // Fonction qui appele le chargement  du json
 function jsonOnLoad() {
-    fetch("books.json")
+    fetch("json/books.json")
         .then((response) => {
             return response.json(); //On covertit la reponse en json
         })
@@ -201,6 +201,28 @@ function chargeByCategory() {
         // Mise à jour du fil d'Ariane
         updateBreadcrumb();
     }
+}
+
+let searchbtn = document.getElementById("searchButton");
+
+searchbtn.addEventListener("click", searchByDescription);
+
+function searchByDescription() {
+    let searchterm = document.getElementById("searchDescription");
+
+    if (searchterm.value.trim() === "") {
+        alert("Veuillez saisir une valeur");
+        return;
+    }
+
+    let filterbook = bookList.filter((book) =>{
+        let shortDescription = book.shortDescription ? book.shortDescription.toLowerCase() : "";
+        let longDescription = book.longDescription ? book.longDescription.toLowerCase() : "";
+        return shortDescription.includes(searchterm) || longDescription.includes(searchterm);
+    })
+
+    showBooks(filterbook);
+    console.log(filterbook);
 }
 
 // Get the button:
